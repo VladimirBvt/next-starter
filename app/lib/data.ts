@@ -9,8 +9,10 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+// import {unstable_noStore as noStore} from 'next/cache';
 
 export async function fetchRevenue() {
+  // noStore(); // делает запрос динамическим без кэша (отказаться от статического рендеринга чтобы предотвратить кэширование ответа)
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
 
@@ -162,6 +164,7 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    // console.log(invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
